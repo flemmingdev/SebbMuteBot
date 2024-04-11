@@ -13,7 +13,7 @@ async def on_ready():
 
 @client.event
 async def on_voice_state_update(member, before, after):
-    if before.self_mute != after.self_mute or before.self_deaf != after.self_deaf
+    if before.self_mute != after.self_mute or before.self_deaf != after.self_deaf:
         if after.self_mute:
             message = f'{member.name} ist nun muted.'
         elif after.self_deaf:
@@ -27,3 +27,4 @@ async def on_voice_state_update(member, before, after):
         await channel.send(message)
 
 client.run(TOKEN)
+
