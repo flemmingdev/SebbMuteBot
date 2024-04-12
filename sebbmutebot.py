@@ -24,11 +24,11 @@ async def on_voice_state_update(member, before, after):
             now_utc = datetime.now(pytz.utc) #aktuelle UTC-Zeit abrufen
             now_germany = now_utc.replace(tzinfo=pytz.utc).astimezone(german_timezone) #Zeit in DE abrufen
             timestamp = now_germany.strftime("%H:%M Uhr") #Zeit im gewünschten Format abrufen
-            
-            if after.self_mute:
-             message = f'{member.name} hat sich um {timestamp} gemuted.'
-            elif after.self_deaf:
+ 
+            if after.self_deaf:
              message = f'{member.name} hat sich um {timestamp} full muted.'
+            elif after.self_mute:
+             message = f'{member.name} hat sich um {timestamp} gemuted.'
             else:
              message = f'{member.name} hat sich um {timestamp} entmuted.'
         
