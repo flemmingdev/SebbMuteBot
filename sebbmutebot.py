@@ -1,6 +1,6 @@
 import discord
 from datetime import datetime
-import pytz
+import pytz # type: ignore
 
 intents = discord.Intents.default()
 intents.voice_states = True
@@ -26,11 +26,11 @@ async def on_voice_state_update(member, before, after):
             timestamp = now_germany.strftime("%H:%M Uhr") #Zeit im gewünschten Format abrufen
  
             if after.self_deaf:
-             message = f'{member.name} hat sich um {timestamp} full muted.'
+             message = f'{member.name} hat sich um {timestamp} full muted. :muted: '
             elif after.self_mute:
-             message = f'{member.name} hat sich um {timestamp} gemuted.'
+             message = f'{member.name} hat sich um {timestamp} gemuted. :muted: '
             else:
-             message = f'{member.name} hat sich um {timestamp} entmuted.'
+             message = f'{member.name} hat sich um {timestamp} entmuted. :muted: '
         
             guild = client.get_guild(int(SERVER_ID))
             channel = guild.get_channel(int(CHANNEL_ID))
