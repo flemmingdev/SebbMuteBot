@@ -1,15 +1,17 @@
 import discord
 from datetime import datetime
+import pytz # type: ignore
 
 intents = discord.Intents.default()
 intents.voice_states = True
 
-TOKEN = 'MTIyODA0MTcxMDE5MDQ2NTA5NQ.G_XFCX.O31YyIn063LGsnQ5dkQ8R4YeGUMHRBCS2S13Rs' #discord bot token
-SERVER_ID = '372827135594725376' #discord server id
-CHANNEL_ID = '1227333701554143252' #discord server kanal id
-TARGET_USER_ID = '424232360960196621' #discord nutzer id
+TOKEN = 'INSERT BOT TOKEN' #discord bot token
+SERVER_ID = '' #insert discord server id
+CHANNEL_ID = '' #insert discord server channel id
+TARGET_USER_ID = '' #insert discord user id
 
 client = discord.Client(intents=intents)
+german_timezone = pytz.timezone('Europe/Berlin')
 
 @client.event
 async def on_ready():
@@ -19,14 +21,16 @@ async def on_ready():
 async def on_voice_state_update(member, before, after):
     if member.id == int(TARGET_USER_ID):
         if before.self_mute != after.self_mute or before.self_deaf != after.self_deaf:
-            now = datetime.now()
-            timestamp = now.strftime("%H:%M Uhr")
-            if after.self_mute:
-             message = f'{member.name} hat sich um {timestamp} gemuted.'
-            elif after.self_deaf:
-             message = f'{member.name} hat sich um {timestamp} full muted.'
+            now_utc = datetime.now(pytz.utc) #aktuelle UTC-Zeit abrufen
+            now_germany = now_utc.replace(tzinfo=pytz.utc).astimezone(german_timezone) #Zeit in DE abrufen
+            timestamp = now_germany.strftime("%H:%M Uhr") #Zeit im gewünschten Format abrufen
+ 
+            if after.self_deaf:
+             message = f'{member.name} hat sich um {timestamp} full muted. :muted: '
+            elif after.self_mute:
+             message = f'{member.name} hat sich um {timestamp} gemuted. :muted: '
             else:
-             message = f'{member.name} hat sich um {timestamp} entmuted.'
+             message = f'{member.name} hat sich um {timestamp} entmuted. :muted: '
         
             guild = client.get_guild(int(SERVER_ID))
             channel = guild.get_channel(int(CHANNEL_ID))
