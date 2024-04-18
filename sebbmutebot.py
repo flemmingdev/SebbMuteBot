@@ -36,6 +36,8 @@ async def on_voice_state_update(member, before, after):
             channel = guild.get_channel(int(CHANNEL_ID))
 
         await channel.send(message)
+        #hello
+        
 
 client.run(TOKEN)
 
