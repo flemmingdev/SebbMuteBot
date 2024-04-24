@@ -62,7 +62,7 @@ async def on_message(message):
         minutes = int((total_mute_time % 3600) // 60)
         seconds = int(total_mute_time % 60)
 
-        await message.channel.send(f"Sebb war insgesamt {hours} Stunden, {minutes} Minuten und {seconds} Sekunden stumm.")
+        await message.channel.send(f"{user_id} war schon insgesamt {hours} Stunden, {minutes} Minuten und {seconds} Sekunden stumm.")
 
 
 def get_total_mute_time(user_id):
