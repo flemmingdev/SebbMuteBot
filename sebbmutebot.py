@@ -12,7 +12,7 @@ TOKEN = 'INSERT BOT TOKEN' #discord bot token
 SERVER_ID = '' #insert discord server id
 CHANNEL_ID = '' #insert discord server channel id
 TARGET_USER_ID = '' #insert discord user id
-COMMAND_PREFIX = '/' #insert command prefix
+COMMAND_PREFIX = '!' #insert command prefix
 
 # SQL-Datenbank verbinden
 conn = sqlite3.connect('mute_tracker.db')
